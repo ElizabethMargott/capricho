@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
+    'recognition.apps.RecognitionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,12 +42,12 @@ INSTALLED_APPS = [
 ]
 
 JAZZMIN_SETTINGS = {
-    "site_icon": "logo/logo.png",
-    "site_logo": "logo/logo.png",
-    "login_logo": "logo/icons8-administrator-100.png",
-    "site_brand": "E&ESUPPORT", #titulo del panel
+    "site_icon": "logo/red.png",
+    "site_logo": "logo/reco.png",
+    "login_logo": "logo/dcmg-soft.png",
+    "site_brand": "DCMG-SOFT", #titulo del panel
     # Welcome text on the login screen
-    "welcome_sign": "Bienvenidos al panel de administración de E&ESUPPORT",
+    "welcome_sign": "Bienvenidos al panel de administración de Asistencia",
     # Links to put along the top menu
     "topmenu_links": [
 
@@ -58,7 +59,7 @@ JAZZMIN_SETTINGS = {
 
         ],
     # Copyright on the footer
-    "copyright": "E&ESUPPORT",
+    "copyright": "DCMG SOFTSOLUTIONS",
 }
 
 JAZZMIN_SETTINGS["show_ui_builder"] = True 
@@ -159,7 +160,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -172,6 +173,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

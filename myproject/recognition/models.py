@@ -1,33 +1,20 @@
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
-class Categoria(models.Model):
+
+class Alumno(models.Model):
     nombre = models.CharField(max_length=250)
-    imagen = models.ImageField(upload_to='categorias/', null=True, blank=True)
+    codigo_carrera = models.CharField(max_length=10)
+    imagen = models.ImageField(upload_to='Images/')
 
     class Meta:
-        verbose_name_plural = 'categorias'
+        verbose_name_plural = 'alumnos'
     
-    def _str_(self):
+    def __str__(self):
         return self.nombre
 
-class Producto(models.Model):
-    nombre = models.CharField(max_length=250)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    descripcion = models.CharField(max_length=5000, default='')
-    precio = models.DecimalField(max_digits=8, decimal_places=2)
-    stock = models.IntegerField(default=0)  # Por ejemplo, el valor predeterminado se establece en 0
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    precio_anterior = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True) #Solo aplica a la categoria OFERTAS
-
-    class Meta:
-        verbose_name_plural = 'productos'
-    
-    def _str_(self):
-        return self.nombre
-    
-class ImagenProducto(models.Model):
-    producto = models.ForeignKey(Producto, related_name='imagenes', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='tienda/images')
-
-    def _str_(self):
-        return f'Imagen para {self.producto.nombre}'
+@receiver(pre_delete, sender=Alumno)
+def eliminar_imagen_alumno(sender, instance, **kwargs):
+    # Eliminar la imagen asociada al alumno
+    instance.imagen.delete(False)
